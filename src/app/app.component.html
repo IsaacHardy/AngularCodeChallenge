@@ -1,3 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">Angular Code Challenge</md-toolbar>
+<button md-raised-button color="accent" (click)="pass()">Pass</button>
+<md-list>
+  <app-image-item
+    *ngFor="let item of dadCarryList"
+    [imageUrl]="item.url"
+    [itemName]="item.name"
+    (itemIsSelected)="addItemToQueue($event, item)"></app-image-item>
+</md-list>
+<md-list>
+  <app-image-item
+    *ngFor="let item of sonCarryList"
+    [imageUrl]="item.url"
+    [itemName]="item.name"
+    (itemIsSelected)="addItemToQueue($event, item)"></app-image-item>
+</md-list>

@@ -1,0 +1,6 @@
+<md-card (click)="highlightItem()" [ngClass]="{highlighted: checked === true}">
+  <md-card-content *ngIf="!isFrozen">{{ itemName }}</md-card-content>
+  <img md-card-avatar src="{{ imageUrl }}">
+  <md-card-content *ngIf="!isFrozen">{{ movementCounter }}</md-card-content>
+  <md-card-content *ngIf="isFrozen">FROZEN</md-card-content>
+</md-card>
