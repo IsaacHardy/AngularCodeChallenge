@@ -9,8 +9,8 @@ export class ImageItemComponent implements OnInit, OnChanges {
   @Output() public itemIsSelected = new EventEmitter();
   @Input() private imageUrl: string;
   @Input() private itemName: string;
+  @Input() private movementCounter: number;
 
-  private movementCounter: number = 0;
   private checked: boolean = false;
   private isFrozen: boolean = false;
 
@@ -20,6 +20,9 @@ export class ImageItemComponent implements OnInit, OnChanges {
 
   }
   public ngOnChanges() {
+    if (this.movementCounter === 5) {
+      this.isFrozen = true;
+    }
   }
   public highlightItem() {
     this.checked = !this.checked;

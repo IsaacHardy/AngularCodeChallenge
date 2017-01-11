@@ -1,0 +1,15 @@
+.button-container, .dad-container, .son-container {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+}
+.dad-container h2 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+}
+.son-container h2 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}

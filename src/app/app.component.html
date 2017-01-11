@@ -1,16 +1,44 @@
-<md-toolbar color="primary">Angular Code Challenge</md-toolbar>
-<button md-raised-button color="accent" (click)="pass()">Pass</button>
-<md-list>
-  <app-image-item
-    *ngFor="let item of dadCarryList"
-    [imageUrl]="item.url"
-    [itemName]="item.name"
-    (itemIsSelected)="addItemToQueue($event, item)"></app-image-item>
-</md-list>
-<md-list>
-  <app-image-item
-    *ngFor="let item of sonCarryList"
-    [imageUrl]="item.url"
-    [itemName]="item.name"
-    (itemIsSelected)="addItemToQueue($event, item)"></app-image-item>
-</md-list>
+<md-toolbar color="primary">Playing Catch With Dad</md-toolbar>
+<md-grid-list cols="8" rowHeight="45em">
+  <md-grid-tile [colspan]="1">
+    <div class="dad-container">
+      <h2>D</h2>
+      <h2>A</h2>
+      <h2>D</h2>
+    </div>
+  </md-grid-tile>
+  <md-grid-tile [colspan]="2">
+    <md-list>
+      <app-image-item
+        *ngFor="let item of dadCarryList"
+        [imageUrl]="item.url"
+        [itemName]="item.name"
+        [movementCounter]="item.movementCounter"
+        (itemIsSelected)="addItemToQueue($event, item)"></app-image-item>
+    </md-list>
+  </md-grid-tile>
+  <md-grid-tile [colspan]="2">
+    <div class="button-container">
+      <p>Click the "Pass" button after selecting one or more balls to pass them.</p>
+      <button md-raised-button color="accent" (click)="pass()">Pass</button>
+      <button md-raised-button color="warn" (click)="reset()">Reset</button>
+    </div>
+  </md-grid-tile>
+  <md-grid-tile [colspan]="2">
+    <md-list>
+      <app-image-item
+        *ngFor="let item of sonCarryList"
+        [imageUrl]="item.url"
+        [itemName]="item.name"
+        [movementCounter]="item.movementCounter"
+        (itemIsSelected)="addItemToQueue($event, item)"></app-image-item>
+    </md-list>
+  </md-grid-tile>
+  <md-grid-tile [colspan]="1">
+    <div class="son-container">
+      <h2>S</h2>
+      <h2>O</h2>
+      <h2>N</h2>
+    </div>
+  </md-grid-tile>
+</md-grid-list>

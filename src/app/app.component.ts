@@ -10,13 +10,12 @@ import { IMAGE_URLS } from './mock.data';
 export class AppComponent implements OnInit {
   @Input() private itemIsSelected;
 
-  public dadCarryList: Array<any> = [];
-  public sonCarryList: Array<any> = [];
-  public itemsInQueue: Array<any> = [];
-  public highlightImage: boolean = false;
-  public movementCounter: number = 0;
-  public imageUrl: string;
-  public mockData: Array<any> = IMAGE_URLS;
+  private dadCarryList: Array<any> = [];
+  private sonCarryList: Array<any> = [];
+  private itemsInQueue: Array<any> = [];
+  private highlightImage: boolean = false;
+  private imageUrl: string;
+  private mockData: Array<any> = IMAGE_URLS;
 
   public ngOnInit() {
     this.mockData.forEach((item) => {
@@ -24,10 +23,10 @@ export class AppComponent implements OnInit {
     });
   }
   private addItemToQueue(event, item) {
-    if (event) {
+    if (event && item.movementCounter < 5) {
       this.highlightImage = true;
       this.itemsInQueue.push(item);
-    } else {
+    } else if (!event && item.movementCounter < 5) {
       this.highlightImage = false;
       this.itemsInQueue.splice(item)
     }
@@ -37,14 +36,32 @@ export class AppComponent implements OnInit {
       item.isDadHolding = !item.isDadHolding;
       if (item.isDadHolding) {
         let index = this.sonCarryList.indexOf(item);
-        this.sonCarryList.splice(index, 1);
+
         this.dadCarryList.push(item);
+        this.sonCarryList.splice(index, 1);
+
+        ++item.movementCounter;
       } else {
         let index = this.dadCarryList.indexOf(item);
-        this.dadCarryList.splice(index, 1);
+
         this.sonCarryList.push(item);
+        this.dadCarryList.splice(index, 1);
+
+        ++item.movementCounter;
       }
     });
     this.itemsInQueue = [];
+  }
+  private reset() {
+    this.itemsInQueue = [];
+    this.dadCarryList = [];
+    this.sonCarryList = [];
+
+    this.mockData.forEach((item) => {
+      item.movementCounter = 0;
+      item.isDadHolding = true;
+      
+      this.dadCarryList.push(item);
+    });
   }
 }
